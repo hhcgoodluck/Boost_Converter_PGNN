@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('../prediction_results_data_driven_pgnn.csv')
+df = pd.read_csv('prediction_results_data_driven_pgnn.csv')
 
 components = ['capacitor', 'inductor', 'diode', 'mosfet']
 relative_errors = {}
@@ -14,7 +14,7 @@ for comp in components:
 
 # 绘制箱线图
 plt.figure(figsize=(8, 6))
-plt.boxplot([relative_errors[c] for c in components], labels=components)
+plt.boxplot([relative_errors[c] for c in components], tick_labels=components)
 plt.ylabel("Relative Error")
 plt.title("Relative Error of Predicted Power per Component")
 plt.grid(True)

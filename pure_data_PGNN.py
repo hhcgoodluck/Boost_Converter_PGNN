@@ -14,7 +14,7 @@ import joblib
 
 # ========== 1. Config ==========
 class Args:
-    data_path = '../boost_converter_dataset.csv'
+    data_path = '../clean_dataset_strict.csv'
     batch_size = 250
     epochs = 300
     drop_frac = 0.1
@@ -94,7 +94,7 @@ def data_driven_loss(y_pred, y_parts, alpha=27.0, eps=1e-6):
     y_total_true = y_parts[:, 4].unsqueeze(1)  # P_loss 总功率
 
     # 每个器件的损耗权重，提升capacitor分支（index=0）的影响力
-    component_weights = torch.tensor([50, 1.0, 1.0, 1.0], device=y_pred.device).unsqueeze(0)  # shape: [1, 4]
+    component_weights = torch.tensor([500, 1.0, 1.0, 1.0], device=y_pred.device).unsqueeze(0)  # shape: [1, 4]
 
     # 主监督损失（加权MSE）
     main_loss = F.mse_loss(y_pred, y_true, reduction='none')  # shape: [batch_size, 4]
@@ -167,7 +167,7 @@ import numpy as np
 import joblib
 
 # ===== 1. 加载测试数据 =====
-test_df = pd.read_csv('../boost_converter_dataset.csv')
+test_df = pd.read_csv('small_data.csv')
 
 # ===== 2. 构造模型输入特征（纯数据驱动，不含物理项）=====
 input_features = ['Vin', 'Iin', 'Vout', 'Iout', 'fs', 'D']
