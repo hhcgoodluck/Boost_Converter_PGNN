@@ -2,7 +2,7 @@ import torch
 import pandas as pd
 import numpy as np
 import joblib
-from 其他设计.res_train_boost_PGNN import compute_physical_features, ResidualPGNN  # 注意更换模型类名
+from 残差学习设计.res_train_boost_PGNN import compute_physical_features, ResidualPGNN  # 注意更换模型类名
 
 # ===== 1. 加载测试数据 =====
 test_df = pd.read_csv('../boost_converter_input.csv')

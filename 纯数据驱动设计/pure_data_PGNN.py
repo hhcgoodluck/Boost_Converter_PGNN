@@ -14,7 +14,7 @@ import joblib
 
 # ========== 1. Config ==========
 class Args:
-    data_path = 'boost_converter_dataset.csv'
+    data_path = '../boost_converter_dataset.csv'
     batch_size = 250
     epochs = 300
     drop_frac = 0.1
@@ -26,7 +26,7 @@ class Args:
     lam_main = 27
 
     val_frac = 0.3
-    save_path = './boost_data_driven_pgnn_model.pth'
+    save_path = '../boost_data_driven_pgnn_model.pth'
 args = Args()
 
 # ========== 2. Load Data ==========
@@ -36,7 +36,7 @@ X = data_raw[input_features].values.astype(np.float32)
 
 scaler_X = StandardScaler()
 X_scaled = scaler_X.fit_transform(X)
-joblib.dump(scaler_X, '../scaler_X_data_driven.pkl')
+joblib.dump(scaler_X, '../../scaler_X_data_driven.pkl')
 
 y_target = data_raw[['P_capacitor', 'P_inductor', 'P_diode', 'P_mosfet']].values.astype(np.float32)
 y_total = data_raw[['P_loss']].values.astype(np.float32)
@@ -167,20 +167,20 @@ import numpy as np
 import joblib
 
 # ===== 1. 加载测试数据 =====
-test_df = pd.read_csv('boost_converter_dataset.csv')
+test_df = pd.read_csv('../boost_converter_dataset.csv')
 
 # ===== 2. 构造模型输入特征（纯数据驱动，不含物理项）=====
 input_features = ['Vin', 'Iin', 'Vout', 'Iout', 'fs', 'D']
 X_raw = torch.tensor(test_df[input_features].values, dtype=torch.float32)
 
 # ===== 3. 标准化输入特征 =====
-scaler_X = joblib.load('../scaler_X_data_driven.pkl')  # 注意：scaler 也是在纯数据驱动模式下训练的版本
+scaler_X = joblib.load('../../scaler_X_data_driven.pkl')  # 注意：scaler 也是在纯数据驱动模式下训练的版本
 X_scaled = scaler_X.transform(X_raw)
 X_scaled = torch.tensor(X_scaled, dtype=torch.float32)
 
 # ===== 4. 加载训练好的模型权重 =====
 model = MultiHeadNet(input_dim=X_scaled.shape[1], hidden_dim=64, num_layers=4, dropout=0.1)
-model.load_state_dict(torch.load('boost_data_driven_pgnn_model.pth'))  # 新模型路径
+model.load_state_dict(torch.load('../boost_data_driven_pgnn_model.pth'))  # 新模型路径
 model.eval()
 
 # ===== 5. 预测 ΔP，即每个器件的功率（此时 ΔP = P_pred，因为没有 P_phy）=====

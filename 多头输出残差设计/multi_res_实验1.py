@@ -1,7 +1,7 @@
 import torch
 import pandas as pd
 import joblib
-from 其他设计.multi_res_boost_PGNN import ResidualPGNN  # 使用新模型
+from 多头残差设计.multi_res_boost_PGNN import ResidualPGNN  # 使用新模型
 
 # ===== 1. 加载测试数据并计算物理建模特征 =====
 def compute_physical_features_predict(df):

@@ -1,7 +1,7 @@
 import torch
 import pandas as pd
 import joblib  # 用于加载 StandardScaler
-from 其他设计.train_boost_PGNN import PGNN, compute_physical_features
+from 物理引导设计.train_boost_PGNN import PGNN, compute_physical_features
 
 # ===== 1. 加载并处理原始测试数据 =====
 test_df = pd.read_csv('../boost_converter_input.csv')

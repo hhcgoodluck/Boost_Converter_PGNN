@@ -11,7 +11,7 @@ import joblib
 
 # ========== 1. Config remains unchanged ==========
 class Args:
-    data_path = 'boost_converter_dataset.csv'
+    data_path = '../boost_converter_dataset.csv'
     batch_size = 250
     epochs = 300
     drop_frac = 0.1
@@ -225,7 +225,7 @@ model.eval()
 
 # ===== 2. 加载并标准化输入特征 =====
 scaler_X = joblib.load('scaler_X_data_driven.pkl')
-data_raw = pd.read_csv('boost_converter_dataset.csv')
+data_raw = pd.read_csv('../boost_converter_dataset.csv')
 input_features = ['Vin', 'Iin', 'Vout', 'Iout', 'fs', 'D']
 X = data_raw[input_features].values.astype(np.float32)
 X_scaled = scaler_X.transform(X)

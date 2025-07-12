@@ -11,13 +11,13 @@ import os
 
 # ========== 1. 参数配置 ==========
 class Args:
-    data_path = 'boost_converter_dataset.csv'  # 数据文件路径
+    data_path = '../boost_converter_dataset.csv'  # 数据文件路径
     batch_size = 128                            # 每批训练样本数
     epochs = 200                                # 训练轮数
     hidden_dim = 32                             # 隐藏层神经元个数
     lr = 1e-3                                   # 学习率
     val_frac = 0.3                              # 验证集比例
-    save_dir = '多任务PGNN/branchnet_weights'  # 模型保存目录
+    save_dir = 'branchnet_weights'  # 模型保存目录
     target_name = 'P_mosfet'                 # 当前训练的目标变量
     lam_relative = 30                           # 相对误差损失权重
 args = Args()
@@ -144,9 +144,9 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 import matplotlib.pyplot as plt
 
 # ========== 1. 参数设置 ==========
-model_path = '多任务PGNN/branchnet_weights/branchnet_P_capacitor.pth'
-scaler_path = '多任务PGNN/branchnet_weights/scaler_X.pkl'
-data_path = 'boost_converter_dataset.csv'
+model_path = 'branchnet_weights/branchnet_P_capacitor.pth'
+scaler_path = 'branchnet_weights/scaler_X.pkl'
+data_path = '../boost_converter_dataset.csv'
 target_col = 'P_capacitor'
 
 # ========== 2. 加载数据 ==========
